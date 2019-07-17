@@ -5,13 +5,18 @@
 .search_box {
   display: flex;
   flex-direction: row;
-  padding: 8px;
+  padding: 16px 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: 0 1px 8px 0 #ccc;
 }
 .add_icon {
   margin-right: 5px;
+  width: 20px;
+  height: 20px;
+}
+.search_box input {
+  flex: 1;
 }
 .list {
   border: 1px solid #ccc;
@@ -21,14 +26,21 @@
   /* padding: 4px; */
 }
 .item {
-  padding: 10px;
+  padding: 16px 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid #ccc;
 }
+.checkbox {
+  display: flex;
+  align-items: center;
+}
 .item:nth-last-child(1) {
   border-bottom: 0;
+}
+.select_btn {
+  margin-right: 6px;
 }
 .operation {
   font-size: 12px;

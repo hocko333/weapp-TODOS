@@ -1,22 +1,21 @@
 <!--pages/todos/todos.wxml-->
 <view class="todos">
   <view class="search_box">
-    <icon class="add_icon" type="success_no_circle" size="20" color="blue" bindtap="handleAdd"></icon>
-    <input placeholder="输入待办事项" bindinput="handleInput" value="{{inputVal}}"></input>
+    <image class="add_icon" src="/assets/plus.png"></image>
+    <input placeholder="输入待办事项" bindconfirm="handleAdd" bindinput="handleInput" value="{{inputVal}}" focus></input>
   </view>
   <view class="list">
-    <checkbox-group bindchange="checkboxChange">
-      <view class="item" wx:for="{{todoList}}" wx:key="item.id">
-        <label class="checkbox" style="text-decoration:{{item.checked ? 'line-through' : 'none'}};color:{{item.checked ? '#777' : '#333'}}">
-          <checkbox value="{{item.id}}" checked="{{item.checked}}"/>{{item.name}}
-        </label>
-        <icon type="clear" size="17" bindtap="handleDelete" data-id="{{item.id}}"></icon>
+    <view class="item" wx:for="{{todoList}}" wx:key="item.id">
+      <view class="checkbox" >
+        <icon class="select_btn" bindtap="handleCheck" data-id="{{item.id}}" type="{{item.checked ? 'success' : 'circle'}}"></icon>
+        <text style="text-decoration:{{item.checked ? 'line-through' : 'none'}};color:{{item.checked ? '#777' : '#333'}}">{{item.name}}</text>
       </view>
-    </checkbox-group>
+      <icon type="clear" size="17" bindtap="handleDelete" data-id="{{item.id}}"></icon>
+    </view>
   </view>
   <view class="operation">
-    <view class="toggle">Toggle all</view>
-    <view class="left">{{0}} item left</view>
-    <view class="clear_complete">Clear complete</view>
+    <view class="toggle" bindtap="toggleAll">Toggle all</view>
+    <view class="left">{{ leftCount }} item left</view>
+    <view class="clear_complete" bindtap="clearComplete">Clear complete</view>
   </view>
 </view>

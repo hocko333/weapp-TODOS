@@ -11,21 +11,21 @@ Page({
       {id: '3', name: '打豆豆', checked: true},
       {id: '4', name: 'Learning Python', checked: false},
     ],
-    newTodos: '',
-    inputVal: ''
+    inputVal: '',
+    leftCount: 0
   },
-  checkboxChange(e) {
+  handleCheck(e) {
+    const id = e.target.dataset.id
     let arr = this.data.todoList
-    arr.forEach(item => {
-      if (e.detail.value.includes(item.id)) {
-        item.checked = true
-      } else {
-        item.checked = false
+    arr.some(item => {
+      if (item.id == id) {
+        item.checked = !item.checked
       }
     })
     this.setData({
       todoList: arr
     })
+    this.getLeftCount()
   },
   handleDelete(e) {
     const id = e.target.dataset.id
@@ -35,14 +35,13 @@ Page({
     this.setData({
       todoList: arr
     })
+    this.getLeftCount()
   },
   handleInput(e) {
-    this.setData({
-      newTodos: e.detail.value
-    })
+    this.data.inputVal = e.detail.value
   },
   handleAdd() {
-    if (!this.data.newTodos) return
+    if (!this.data.inputVal) return
     let maxObjId = 0
     if (this.data.todoList.length >= 1) {
       maxObjId = this.data.todoList.sort((a, b) => b.id - a.id)[0].id - 0
@@ -50,20 +49,42 @@ Page({
     const arr = this.data.todoList
     arr.unshift({
       id: (maxObjId + 1) + '',
-      name: this.data.newTodos,
+      name: this.data.inputVal,
       checked: false
     })
     this.setData({
       todoList: arr,
-      inputVal: '',
-      newTodos: ''
+      inputVal: ''
     })
+    this.getLeftCount()
+  },
+  toggleAll() {
+    let arr = this.data.todoList
+    let firstStatus = arr[0].checked
+    let newArr = arr.map(item => {
+      item.checked = !firstStatus
+      return item
+    })
+    this.setData({
+      todoList: newArr
+    })
+    this.getLeftCount()
+  },
+  clearComplete() {
+    let arr = this.data.todoList.filter(item => !item.checked)
+    this.setData({
+      todoList: arr
+    })
+  },
+  getLeftCount() {
+    const leftCount = this.data.todoList.filter(item => !item.checked).length
+    this.setData({ leftCount })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getLeftCount()
   },
 
   /**
