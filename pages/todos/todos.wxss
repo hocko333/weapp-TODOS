@@ -1,0 +1,38 @@
+/* pages/todos/todos.wxss */
+.todos {
+  padding: 15px;
+}
+.search_box {
+  display: flex;
+  flex-direction: row;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 1px 8px 0 #ccc;
+}
+.add_icon {
+  margin-right: 5px;
+}
+.list {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 1px 8px 0 #ccc;
+  margin-top: 10px;
+  /* padding: 4px; */
+}
+.item {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ccc;
+}
+.item:nth-last-child(1) {
+  border-bottom: 0;
+}
+.operation {
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
